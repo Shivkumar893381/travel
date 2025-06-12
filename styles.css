@@ -1,0 +1,303 @@
+
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #222222);
+    color: #eeeeee;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  a:focus, button:focus, input:focus {
+    outline: 3px solid #06b6d4;
+    outline-offset: 3px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  /* Header */
+  header {
+    background: rgba(25,25,25,0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #064550;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 24px;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #06b6d4, #8b5cf6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    user-select: none;
+  }
+  nav.desktop-nav {
+    display: none;
+    gap: 36px;
+  }
+  nav.desktop-nav a {
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 8px 0;
+  }
+  nav.desktop-nav a:hover,
+  nav.desktop-nav a.active {
+    color: #8b5cf6;
+  }
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: #8b5cf6;
+    transition: width 0.3s ease;
+  }
+  nav.desktop-nav a:hover::after,
+  nav.desktop-nav a.active::after {
+    width: 100%;
+  }
+
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    background: none;
+    border: none;
+    color: #06b6d4;
+    font-size: 2.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  /* Mobile Nav Overlay */
+  .mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.96);
+    backdrop-filter: blur(10px);
+    color: white;
+    display: none;
+    flex-direction: column;
+    padding: 3rem 2rem;
+    gap: 48px;
+    z-index: 1500;
+  }
+  .mobile-nav-overlay.show {
+    display: flex;
+  }
+  .mobile-nav-close {
+    align-self: flex-end;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #06b6d4;
+    cursor: pointer;
+  }
+  .mobile-nav-overlay a {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Search Container */
+  .search-container {
+    position: relative;
+    max-width: 320px;
+    flex-shrink: 0;
+  }
+  .search-container input[type="search"] {
+    width: 100%;
+    padding: 10px 44px 10px 16px;
+    border-radius: 14px;
+    border: 1.5px solid #064550;
+    font-size: 1rem;
+    background: #0a2739;
+    color: #eee;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .search-container input[type="search"]:focus {
+    border-color: #8b5cf6;
+    background: #123c63;
+  }
+  .search-container .material-icons.search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #06b6d4;
+    pointer-events: none;
+    font-size: 24px;
+  }
+  .search-container button.search-submit {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #06b6d4;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 0;
+  }
+  .search-container button.search-submit:focus {
+    outline: 2px solid #06b6d4;
+    outline-offset: 1px;
+  }
+
+  /* Main Content */
+  main {
+    flex: 1;
+    padding: 48px 0;
+  }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  article.news-article {
+    background: #121212cc;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  article.news-article:hover,
+  article.news-article:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.5);
+  }
+  article.news-article a.article-link {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .article-image {
+    flex-shrink: 0;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+  }
+  .article-content {
+    padding: 20px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .article-title {
+    font-size: 1.45rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: #ddd;
+  }
+  .article-summary {
+    flex-grow: 1;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #bbb;
+  }
+  .article-meta {
+    font-size: 0.85rem;
+    color: #06b6d4;
+    font-weight: 600;
+  }
+  .article-readmore-btn {
+    margin-top: 12px;
+    align-self: flex-start;
+    font-weight: 700;
+    color: #8b5cf6;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  .article-readmore-btn:hover,
+  .article-readmore-btn:focus {
+    color: #06b6d4;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(15,15,15,0.95);
+    color: #8bb4dc;
+    padding: 32px 20px;
+    border-top: 1px solid #064550;
+  }
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+    gap: 32px;
+  }
+  .footer-section h4 {
+    font-weight: 700;
+    color: #06b6d4;
+    margin-bottom: 14px;
+  }
+  .footer-section a {
+    display: block;
+    color: #8bb4dc;
+    margin: 6px 0;
+    transition: color 0.3s ease;
+  }
+  .footer-section a:hover,
+  .footer-section a:focus {
+    color: #06b6d4;
+  }
+
+  /* Responsive */
+  @media (min-width: 640px) {
+    nav.desktop-nav {
+      display: flex;
+    }
+    .mobile-menu-btn {
+      display: none;
+    }
+    .articles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .articles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1440px) {
+    .container {
+      max-width: 1440px;
+    }
+  }

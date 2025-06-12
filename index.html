@@ -1,582 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Daily updates on world news, technology, health, business and entertainment. Trusted news platform with original content and full compliance with Google AdSense policies." />
-  <meta name="author" content="Trusted News Media" />
-  <title>Trusted News Media - Latest World News & Updates</title>
-  <style>
-    /* Reset and base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: #f5f7fa;
-      color: #222;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      scroll-behavior: smooth;
-    }
-    a {
-      color: #0563af;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover,
-    a:focus {
-      color: #003d80;
-      outline: none;
-      text-decoration: underline;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GlobalNews Media - Stay Informed</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="script.js">
 
-    header, footer {
-      background-color: #1f2937;
-      color: #f9fafb;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      user-select: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-    }
-
-    .logo {
-      font-weight: 900;
-      font-size: 1.7rem;
-      color: #3b82f6;
-      letter-spacing: 0.05em;
-      user-select: text;
-    }
-
-    nav.desktop-nav {
-      display: none;
-      gap: 2rem;
-    }
-
-    nav.desktop-nav a {
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.25rem 0;
-      position: relative;
-      color: #f9fafb;
-      user-select: text;
-    }
-
-    nav.desktop-nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background-color: #3b82f6;
-      border-radius: 2px;
-    }
-
-    button.mobile-menu-toggle {
-      background: none;
-      border: none;
-      color: #3b82f6;
-      font-size: 1.8rem;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-      user-select: none;
-    }
-
-    button.mobile-menu-toggle:focus {
-      outline: 3px solid #3b82f6;
-      outline-offset: 2px;
-    }
-
-    nav.mobile-nav {
-      display: none;
-      flex-direction: column;
-      background-color: #374151;
-      padding: 1rem 0;
-      user-select: none;
-    }
-    nav.mobile-nav.show {
-      display: flex;
-    }
-    nav.mobile-nav a {
-      padding: 1rem 2rem;
-      color: #d1d5db;
-      font-weight: 600;
-      border-bottom: 1px solid #4b5563;
-      user-select: text;
-    }
-    nav.mobile-nav a:last-child {
-      border-bottom: none;
-    }
-    nav.mobile-nav a:hover,
-    nav.mobile-nav a:focus {
-      background-color: #3b82f6;
-      color: white;
-      outline: none;
-    }
-
-    main {
-      flex: 1 0 auto;
-      max-width: 1024px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      width: 100%;
-    }
-
-    /* Grid layout for main content */
-    .content-wrapper {
-      display: grid;
-      grid-template-columns: 3fr 1.4fr;
-      gap: 2rem;
-    }
-
-    /* News feed */
-    section.news-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    article.news-article {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    article.news-article:hover,
-    article.news-article:focus-within {
-      box-shadow: 0 14px 35px rgba(0,0,0,0.15);
-      transform: translateY(-6px);
-      outline: none;
-    }
-    article.news-article img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      aspect-ratio: 16/9;
-      user-select: none;
-    }
-    article.news-article .content {
-      padding: 1rem 1.5rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    article.news-article h2 {
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #111827;
-      user-select: text;
-    }
-    article.news-article p {
-      margin: 0;
-      font-size: 1rem;
-      color: #4b5563;
-      user-select: text;
-      flex-grow: 1;
-    }
-    article.news-article a.read-more {
-      margin-top: 0.8rem;
-      font-weight: 700;
-      color: #3b82f6;
-      align-self: flex-start;
-    }
-    article.news-article a.read-more:hover,
-    article.news-article a.read-more:focus {
-      text-decoration: underline;
-      outline: none;
-    }
-
-    aside.sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    .trending-topics, .categories, .newsletter {
-      background: white;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 4px 14px rgb(0 0 0 / 0.05);
-      user-select: text;
-    }
-
-    .section-title {
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-      color: #111827;
-    }
-
-    .trending-topics ul, .categories ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .trending-topics li, .categories li {
-      margin-bottom: 0.75rem;
-    }
-    .trending-topics a, .categories a {
-      font-weight: 600;
-      color: #2563eb;
-      transition: color 0.3s ease;
-    }
-    .trending-topics a:hover,
-    .trending-topics a:focus,
-    .categories a:hover,
-    .categories a:focus {
-      color: #1e40af;
-      outline: none;
-    }
-
-    .categories ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .categories li a {
-      background: #3b82f6;
-      color: white;
-      padding: 0.35rem 1rem;
-      border-radius: 9999px;
-      font-weight: 700;
-    }
-    .categories li a:hover,
-    .categories li a:focus {
-      background: #2563eb;
-      outline: none;
-    }
-
-    /* Contact form */
-    form.contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 400px;
-    }
-    form label {
-      font-weight: 600;
-      color: #374151;
-    }
-    form input, form textarea {
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1.5px solid #d1d5db;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: border-color 0.3s ease;
-    }
-    form input:focus, form textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 5px #2563eb;
-    }
-    form button {
-      background-color: #2563eb;
-      color: white;
-      padding: 0.9rem 1.25rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: background-color 0.3s ease;
-    }
-    form button:hover,
-    form button:focus {
-      background-color: #1e40af;
-      outline: none;
-    }
-    #form-status {
-      font-weight: 700;
-      color: green;
-      margin-top: 0.5rem;
-      user-select: text;
-    }
-
-    footer {
-      background-color: #1f2937;
-      color: #cbd5e1;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      text-align: center;
-      user-select: none;
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-      nav.desktop-nav {
-        display: flex;
-      }
-      button.mobile-menu-toggle {
-        display: none;
-      }
-      nav.mobile-nav {
-        display: none !important;
-      }
-      main {
-        width: 100%;
-      }
-    }
-    @media (max-width: 767px) {
-      .content-wrapper {
-        display: block;
-      }
-      aside.sidebar {
-        margin-top: 3rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <header role="banner">
-    <div class="logo" aria-label="Trusted News Media logo">Trusted News Media</div>
+<header>
+  <div class="container header-inner" role="banner">
+    <a href="#" class="logo" aria-label="GlobalNews Media homepage">GlobalNews</a>
     <nav class="desktop-nav" role="navigation" aria-label="Primary navigation">
-      <a href="#home" class="active" tabindex="0">Home</a>
-      <a href="#about" tabindex="0">About</a>
-      <a href="#contact" tabindex="0">Contact</a>
-      <a href="#privacy" tabindex="0">Privacy Policy</a>
-      <a href="#terms" tabindex="0">Terms of Service</a>
+      <a href="#" class="active" aria-current="page">Home</a>
+      <a href="#world-news">World</a>
+      <a href="#technology-news">Technology</a>
+      <a href="#culture-news">Culture</a>
+      <a href="#sports-news">Sports</a>
     </nav>
-    <button aria-controls="mobile-navigation" aria-expanded="false" aria-label="Toggle menu" class="mobile-menu-toggle">&#9776;</button>
-  </header>
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span class="material-icons">menu</span>
+    </button>
+    <form class="search-container" role="search" aria-label="Site search" onsubmit="event.preventDefault(); handleSearch(searchInput.value);">
+      <input id="search-input" type="search" placeholder="Search articles..." aria-label="Search articles" autocomplete="off" />
+      <button type="submit" class="search-submit" aria-label="Submit search">
+        <span class="material-icons">search</span>
+      </button>
+    </form>
+  </div>
 
-  <nav id="mobile-navigation" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="#home" tabindex="0" class="active">Home</a>
-    <a href="#about" tabindex="0">About</a>
-    <a href="#contact" tabindex="0">Contact</a>
-    <a href="#privacy" tabindex="0">Privacy Policy</a>
-    <a href="#terms" tabindex="0">Terms of Service</a>
+  <!-- Mobile menu overlay -->
+  <nav id="mobile-nav" class="mobile-nav-overlay" aria-hidden="true" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+    <a href="#" tabindex="-1">Home</a>
+    <a href="#world-news" tabindex="-1">World</a>
+    <a href="#technology-news" tabindex="-1">Technology</a>
+    <a href="#culture-news" tabindex="-1">Culture</a>
+    <a href="#sports-news" tabindex="-1">Sports</a>
   </nav>
+</header>
 
-  <main>
-    <div class="content-wrapper">
-      <section id="home" class="news-feed" tabindex="0" aria-label="Latest news section">
-        <article class="news-article" tabindex="0">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e8777d7c-cea4-4281-b5e4-99a1e9aab2cd.png" alt="Global interconnected technology devices and data streaming" />
-          <div class="content">
-            <h2><a href="#news1" tabindex="0">Global Technology Trends Revolutionizing 2025</a></h2>
-            <p>Explore cutting-edge innovations shaping the tech landscape worldwide, from AI advancements to sustainable computing.</p>
-            <a href="#news1" class="read-more" tabindex="0">Read More</a>
-          </div>
-        </article>
-        <article class="news-article" tabindex="0">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1f2f7acd-32ac-46fb-9767-9647042f2f41.png" alt="People exercising outdoors in a park promoting health and wellness" />
-          <div class="content">
-            <h2><a href="#news2" tabindex="0">Top Health & Wellness Habits Backed by Experts</a></h2>
-            <p>Discover expert tips to improve your physical and mental well-being for a balanced lifestyle in the modern world.</p>
-            <a href="#news2" class="read-more" tabindex="0">Read More</a>
-          </div>
-        </article>
-        <article class="news-article" tabindex="0">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cccc37e8-0559-49b1-90f5-520817c5296e.png" alt="Business people celebrating success in a modern office" />
-          <div class="content">
-            <h2><a href="#news3" tabindex="0">Smart Business Strategies for Thriving in Competitive Markets</a></h2>
-            <p>A comprehensive guide to sustainable growth and innovation for startups and established companies alike.</p>
-            <a href="#news3" class="read-more" tabindex="0">Read More</a>
-          </div>
-        </article>
-        <article class="news-article" tabindex="0">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c67fd83d-d016-4ead-95ec-9f8ec28e391d.png" alt="Audience enjoying a live concert with energetic lighting" />
-          <div class="content">
-            <h2><a href="#news4" tabindex="0">Entertainment Highlights: Top Events and Releases This Month</a></h2>
-            <p>Stay up-to-date on the most exciting concerts, movies, and TV shows making waves in the entertainment world.</p>
-            <a href="#news4" class="read-more" tabindex="0">Read More</a>
-          </div>
-        </article>
-      </section>
+<main class="container" role="main" id="main-content">
 
-      <aside class="sidebar" aria-label="Sidebar with trending topics and categories">
-        <section class="trending-topics" aria-labelledby="trending-title">
-          <h3 id="trending-title" class="section-title">Trending Topics</h3>
-          <ul>
-            <li><a href="#tech" tabindex="0">Artificial Intelligence</a></li>
-            <li><a href="#health" tabindex="0">Mental Health Awareness</a></li>
-            <li><a href="#climate" tabindex="0">Climate Change</a></li>
-            <li><a href="#cryptocurrency" tabindex="0">Cryptocurrency</a></li>
-            <li><a href="#remote" tabindex="0">Remote Work</a></li>
-          </ul>
-        </section>
+  <section id="world-news" aria-label="World news section" class="articles-grid">
+    <article id="article-1" class="news-article" tabindex="0">
+      <a href="#article-1" class="article-link" tabindex="-1" aria-describedby="desc-1">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bed803b-aab9-4b29-a994-fc684ad11a2a.png');" role="img" aria-label="Image of Global Summit 2025"></div>
+        <div class="article-content">
+          <h3 class="article-title">Global Summit 2025 Charts a Path to Climate Resilience</h3>
+          <p id="desc-1" class="article-summary">Leaders from 100+ countries commit to ambitious climate action in the landmark Global Summit.</p>
+          <time class="article-meta" datetime="2025-06-10">June 10, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
 
-        <section class="categories" aria-labelledby="categories-title">
-          <h3 id="categories-title" class="section-title">Categories</h3>
-          <ul>
-            <li><a href="#technology" tabindex="0">Technology</a></li>
-            <li><a href="#health" tabindex="0">Health</a></li>
-            <li><a href="#business" tabindex="0">Business</a></li>
-            <li><a href="#entertainment" tabindex="0">Entertainment</a></li>
-            <li><a href="#science" tabindex="0">Science</a></li>
-            <li><a href="#sports" tabindex="0">Sports</a></li>
-            <li><a href="#travel" tabindex="0">Travel</a></li>
-            <li><a href="#education" tabindex="0">Education</a></li>
-          </ul>
-        </section>
+    <article id="article-2" class="news-article" tabindex="0">
+      <a href="#article-2" class="article-link" tabindex="-1" aria-describedby="desc-2">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0512ac3e-33b7-413e-b450-e5b3a57c1b06.png');" role="img" aria-label="Image of Peace Treaty Signing"></div>
+        <div class="article-content">
+          <h3 class="article-title">Historic Peace Treaty Signed in Middle East</h3>
+          <p id="desc-2" class="article-summary">Diplomatic breakthrough promises stability after decades of conflict.</p>
+          <time class="article-meta" datetime="2025-06-12">June 12, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+  </section>
 
-        <section class="newsletter" aria-labelledby="newsletter-title">
-          <h3 id="newsletter-title" class="section-title">Subscribe to Newsletter</h3>
-          <p>Get daily news updates straight to your inbox.</p>
-          <form id="newsletter-form" aria-label="Newsletter subscription form">
-            <label for="newsletter-email" class="sr-only">Email address</label>
-            <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required style="
-              width: 100%;
-              padding: 0.75rem 1rem;
-              border-radius: 6px;
-              border: 1.5px solid #d1d5db;
-              font-size: 1rem;
-              margin-bottom: 0.75rem;
-            "/>
-            <button type="submit" style="
-              width: 100%;
-              background-color: #3b82f6;
-              color: white;
-              padding: 0.75rem 0;
-              border: none;
-              border-radius: 8px;
-              font-weight: 700;
-              cursor: pointer;
-              font-size: 1.1rem;
-            ">Subscribe</button>
-            <div id="newsletter-status" role="alert" aria-live="polite" style="margin-top: 0.5rem; font-weight: 600;color: green; display: none;"></div>
-          </form>
-        </section>
-      </aside>
-    </div>
+  <section id="technology-news" aria-label="Technology news section" class="articles-grid">
+    <article id="article-3" class="news-article" tabindex="0">
+      <a href="#article-3" class="article-link" tabindex="-1" aria-describedby="desc-3">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3fafc113-be7d-4da7-a76a-1311f99f2706.png');" role="img" aria-label="Image of AI revolution"></div>
+        <div class="article-content">
+          <h3 class="article-title">AI Revolutionizes Healthcare Diagnostics</h3>
+          <p id="desc-3" class="article-summary">New AI tools detect diseases earlier and more accurately, saving lives worldwide.</p>
+          <time class="article-meta" datetime="2025-06-15">June 15, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
 
-    <section id="about" tabindex="0" aria-label="About Trusted News Media section" style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.06);">
-      <h2>About Trusted News Media</h2>
-      <p>Trusted News Media is dedicated to delivering unbiased, factual, and timely news from around the world. Our aim is to keep you informed with original content carefully researched by expert journalists.</p>
-      <p>We maintain strict editorial standards to ensure quality and trustworthiness, supporting our commitment to public service and responsible journalism.</p>
+    <article id="article-4" class="news-article" tabindex="0">
+      <a href="#article-4" class="article-link" tabindex="-1" aria-describedby="desc-4">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30da6370-5234-4367-a008-4235bdefdedc.png');" role="img" aria-label="Image of New Space Telescope"></div>
+        <div class="article-content">
+          <h3 class="article-title">Launch of New Space Telescope Reveals Cosmic Wonders</h3>
+          <p id="desc-4" class="article-summary">Astronomers unveil stunning images and data from the latest telescope in orbit.</p>
+          <time class="article-meta" datetime="2025-06-18">June 18, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+  </section>
+
+  <section id="culture-news" aria-label="Culture news section" class="articles-grid">
+    <article id="article-5" class="news-article" tabindex="0">
+      <a href="#article-5" class="article-link" tabindex="-1" aria-describedby="desc-5">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3c32c2f3-9652-4fa9-a66f-1b5eb700268d.png');" role="img" aria-label="Image of Art Exhibition Opening"></div>
+        <div class="article-content">
+          <h3 class="article-title">Modern Art Exhibition Opens in Berlin</h3>
+          <p id="desc-5" class="article-summary">Celebrating national and international artists with diverse and provocative works.</p>
+          <time class="article-meta" datetime="2025-06-20">June 20, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+
+    <article id="article-6" class="news-article" tabindex="0">
+      <a href="#article-6" class="article-link" tabindex="-1" aria-describedby="desc-6">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e1f6ad2-ec71-429b-baf3-0454a0e4f549.png');" role="img" aria-label="Image of International Film Festival"></div>
+        <div class="article-content">
+          <h3 class="article-title">International Film Festival Shines Light on Emerging Directors</h3>
+          <p id="desc-6" class="article-summary">A platform for new voices in cinema, featuring screenings and workshops worldwide.</p>
+          <time class="article-meta" datetime="2025-06-22">June 22, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+  </section>
+
+  <section id="sports-news" aria-label="Sports news section" class="articles-grid">
+    <article id="article-7" class="news-article" tabindex="0">
+      <a href="#article-7" class="article-link" tabindex="-1" aria-describedby="desc-7">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5cbb0203-4ca5-4ed4-a52e-95ea153c95ab.png');" role="img" aria-label="Image of Championship Finals"></div>
+        <div class="article-content">
+          <h3 class="article-title">Championship Finals: Thrilling Victory Ends Season</h3>
+          <p id="desc-7" class="article-summary">An unforgettable match that kept fans on the edge of their seats.</p>
+          <time class="article-meta" datetime="2025-06-25">June 25, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+
+    <article id="article-8" class="news-article" tabindex="0">
+      <a href="#article-8" class="article-link" tabindex="-1" aria-describedby="desc-8">
+        <div class="article-image" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/79be127c-b08b-48c2-acfd-a8fc1f087804.png');" role="img" aria-label="Image of Olympics 2025"></div>
+        <div class="article-content">
+          <h3 class="article-title">Olympics 2025: A Celebration of Athletic Excellence</h3>
+          <p id="desc-8" class="article-summary">Athletes from all over the world unite to compete and inspire.</p>
+          <time class="article-meta" datetime="2025-06-28">June 28, 2025</time>
+          <span class="article-readmore-btn" aria-hidden="true">Read More <span class="material-icons">arrow_forward</span></span>
+        </div>
+      </a>
+    </article>
+  </section>
+</main>
+
+<footer role="contentinfo" aria-label="Page footer">
+  <div class="footer-container">
+    <section class="footer-section" aria-label="Company info">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
     </section>
-
-    <section id="contact" tabindex="0" aria-label="Contact Trusted News Media section" style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 600px;">
-      <h2>Contact Us</h2>
-      <p>Questions? Feedback? We welcome your messages and inquiries. Reach out via email or use the contact form below.</p>
-      <p>Email: <a href="mailto:contact@trustednewsmedia.com">contact@trustednewsmedia.com</a></p>
-      <form id="contact-form" class="contact-form" aria-label="Contact form">
-        <label for="name">Name:</label>
-        <input id="name" type="text" name="name" required placeholder="Your full name" minlength="2" />
-        <label for="email">Email:</label>
-        <input id="email" type="email" name="email" required placeholder="you@example.com" />
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required placeholder="Write your message here"></textarea>
-        <button type="submit">Send Message</button>
-        <div id="form-status" role="alert" aria-live="polite" style="display:none; margin-top: 0.5rem; color: green; font-weight: 700;"></div>
-      </form>
+    <section class="footer-section" aria-label="Support">
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
     </section>
-
-    <section id="privacy" tabindex="0" aria-label="Privacy Policy section" style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 900px;">
-      <h2>Privacy Policy</h2>
-      <p>We respect your privacy and are committed to protecting your information. This policy describes how we collect, use, and safeguard your data on Trusted News Media.</p>
-      <ul>
-        <li>We collect only minimal personal data (such as email addresses you submit) and solely use it to respond to inquiries or newsletter subscriptions.</li>
-        <li>We do not share or sell your personal data to third parties.</li>
-        <li>Cookies or analytic tools are used only to improve site performance and your experience.</li>
-        <li>You have the right to request deletion of any personal data collected.</li>
-        <li>Our practices comply with applicable regulations including GDPR and CCPA.</li>
-      </ul>
+    <section class="footer-section" aria-label="Social media links">
+      <h4>Connect</h4>
+      <a href="#" aria-label="Facebook"><span class="material-icons" aria-hidden="true">facebook</span> Facebook</a>
+      <a href="#" aria-label="Twitter"><span class="material-icons" aria-hidden="true">twitter</span> Twitter</a>
+      <a href="#" aria-label="Instagram"><span class="material-icons" aria-hidden="true">instagram</span> Instagram</a>
     </section>
-
-    <section id="terms" tabindex="0" aria-label="Terms of Service section" style="margin-top: 3rem; margin-bottom: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 900px;">
-      <h2>Terms of Service</h2>
-      <p>By using Trusted News Media, you agree to abide by our terms:</p>
-      <ul>
-        <li>Content is for informational purposes only and may change without notice.</li>
-        <li>We do not guarantee the absolute accuracy or completeness of any content.</li>
-        <li>Unauthorized reproduction or use of our content is prohibited.</li>
-        <li>You agree to use the site lawfully and not to disrupt or misuse the website.</li>
-        <li>We reserve the right to modify terms without prior notice; continued use implies acceptance.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <p>&copy; 2025 Trusted News Media. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Navigation link active state
-    function setActiveLink(hash) {
-      document.querySelectorAll('nav.desktop-nav a, nav.mobile-nav a').forEach((link) => {
-        if (link.getAttribute('href') === hash) {
-          link.classList.add('active');
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        }
-      });
-    }
-
-    setActiveLink(window.location.hash || '#home');
-
-    window.addEventListener('hashchange', () => {
-      setActiveLink(window.location.hash);
-    });
-
-    // Mobile menu toggle
-    const toggleBtn = document.querySelector('button.mobile-menu-toggle');
-    const mobileNav = document.getElementById('mobile-navigation');
-
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.classList.toggle('show');
-    });
-
-    // Close mobile menu on link click
-    mobileNav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('show');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // Contact form
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formStatus.style.color = 'green';
-      formStatus.textContent = 'Thank you for your message! We will get back to you soon.';
-      formStatus.style.display = 'block';
-      contactForm.reset();
-    });
-
-    // Newsletter form
-    const newsletterForm = document.getElementById('newsletter-form');
-    const newsletterStatus = document.getElementById('newsletter-status');
-
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = newsletterForm.querySelector('input[type="email"]');
-      if (emailInput.validity.valid) {
-        newsletterStatus.textContent = 'Thank you for subscribing!';
-        newsletterStatus.style.display = 'block';
-        newsletterForm.reset();
-      } else {
-        newsletterStatus.style.color = 'red';
-        newsletterStatus.textContent = 'Please enter a valid email address.';
-        newsletterStatus.style.display = 'block';
-      }
-    });
-  </script>
+  </div>
+</footer>
 </body>
 </html>
+
